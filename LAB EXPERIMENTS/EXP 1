@@ -1,0 +1,52 @@
+# ==========================================
+# FIND-S Algorithm Implementation
+# ==========================================
+
+import pandas as pd
+
+# Training dataset
+data = {
+    'Sky': ['Sunny', 'Sunny', 'Rainy', 'Sunny'],
+    'AirTemp': ['Warm', 'Warm', 'Cold', 'Warm'],
+    'Humidity': ['Normal', 'High', 'High', 'High'],
+    'Wind': ['Strong', 'Strong', 'Strong', 'Strong'],
+    'Water': ['Warm', 'Warm', 'Warm', 'Cool'],
+    'Forecast': ['Same', 'Same', 'Change', 'Same'],
+    'EnjoySport': ['Yes', 'Yes', 'No', 'Yes']
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+print("Training Dataset:\n")
+print(df)
+
+# Separate features and target
+concepts = df.iloc[:, :-1].values
+target = df.iloc[:, -1].values
+
+# FIND-S Algorithm
+def find_s(concepts, target):
+
+    # Initialize hypothesis with first positive example
+    hypothesis = None
+
+    for i in range(len(target)):
+        if target[i] == "Yes":
+            hypothesis = concepts[i].copy()
+            break
+
+    # Generalize hypothesis
+    for i in range(len(concepts)):
+        if target[i] == "Yes":
+            for j in range(len(hypothesis)):
+                if hypothesis[j] != concepts[i][j]:
+                    hypothesis[j] = '?'
+
+    return hypothesis
+
+# Run FIND-S
+final_hypothesis = find_s(concepts, target)
+
+print("\nMost Specific Hypothesis:")
+print(final_hypothesis)
