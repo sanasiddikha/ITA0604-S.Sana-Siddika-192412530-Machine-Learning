@@ -1,0 +1,56 @@
+# ==========================================
+# Expectation-Maximization (EM) Algorithm
+# using Gaussian Mixture Model (GMM)
+# ==========================================
+
+# Import Libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.mixture import GaussianMixture
+from sklearn.metrics import accuracy_score
+
+# Generate Sample Dataset
+X, y_true = make_blobs(
+    n_samples=300,
+    centers=3,
+    cluster_std=0.60,
+    random_state=42
+)
+
+# Create Gaussian Mixture Model
+gmm = GaussianMixture(
+    n_components=3,
+    covariance_type='full',
+    random_state=42
+)
+
+# Train the Model (Expectation-Maximization)
+gmm.fit(X)
+
+# Predict Cluster Labels
+labels = gmm.predict(X)
+
+# Print Cluster Centers
+print("Cluster Centers:\n")
+print(gmm.means_)
+
+# Plot Clustering Results
+plt.figure(figsize=(8,6))
+plt.scatter(X[:,0], X[:,1], c=labels, cmap='viridis', s=50)
+plt.scatter(gmm.means_[:,0], gmm.means_[:,1],
+            c='red', marker='X', s=250, label='Cluster Centers')
+
+plt.title("Expectation-Maximization (Gaussian Mixture Model)")
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Predict a New Sample
+new_sample = np.array([[2.0, 5.0]])
+predicted_cluster = gmm.predict(new_sample)
+
+print("\nNew Sample:", new_sample)
+print("Predicted Cluster:", predicted_cluster[0])
