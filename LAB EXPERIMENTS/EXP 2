@@ -1,0 +1,58 @@
+import pandas as pd
+import numpy as np
+
+# Read the CSV file
+data = pd.read_csv("trainingdata.csv")
+
+print("Training Dataset:\n")
+print(data)
+
+# Separate attributes and target
+concepts = np.array(data.iloc[:, :-1])
+target = np.array(data.iloc[:, -1])
+
+# Candidate Elimination Algorithm
+def candidate_elimination(concepts, target):
+
+    specific_h = concepts[0].copy()
+
+    general_h = [["?" for i in range(len(specific_h))]
+                 for j in range(len(specific_h))]
+
+    print("\nInitial Specific Hypothesis:")
+    print(specific_h)
+
+    print("\nInitial General Hypothesis:")
+    print(np.array(general_h))
+
+    for i, h in enumerate(concepts):
+
+        if target[i] == "Yes":
+
+            for x in range(len(specific_h)):
+                if h[x] != specific_h[x]:
+                    specific_h[x] = '?'
+                    general_h[x][x] = '?'
+
+        if target[i] == "No":
+
+            for x in range(len(specific_h)):
+                if h[x] != specific_h[x]:
+                    general_h[x][x] = specific_h[x]
+                else:
+                    general_h[x][x] = '?'
+
+    # Remove overly general hypotheses
+    final_general = [g for g in general_h if g != ['?'] * len(specific_h)]
+
+    return specific_h, final_general
+
+# Run Algorithm
+S, G = candidate_elimination(concepts, target)
+
+print("\nFinal Specific Hypothesis (S):")
+print(S)
+
+print("\nFinal General Hypothesis (G):")
+for g in G:
+    print(g)
