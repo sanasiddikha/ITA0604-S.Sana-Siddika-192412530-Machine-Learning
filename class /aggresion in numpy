@@ -1,0 +1,96 @@
+import numpy as np
+
+sales = np.array([100, 200, 150, 300, 250])
+
+print("Total Sales:", np.sum(sales))
+print("Average Sales:", np.mean(sales))
+print("Minimum Sales:", np.min(sales))
+print("Maximum Sales:", np.max(sales))
+print("Number of Records:", sales.size)
+Output:
+Total Sales: 1000
+Average Sales: 200.0
+Minimum Sales: 100
+Maximum Sales: 300
+Number of Records: 5
+Layman Example
+Suppose daily shop sales are:
+Monday    = 100
+Tuesday   = 200
+Wednesday = 150
+Thursday  = 300
+Friday    = 250
+Aggregation helps us answer:
+•	What is total sales? → 1000 
+•	What is average sales? → 200 
+•	Which is lowest? → 100 
+•	Which is highest? → 300 
+Instead of looking at all individual values, we get a summary.
+________________________________________
+Aggregation in 2D Array
+Consider:
+import numpy as np
+
+data = np.array([
+    [10, 20, 30],
+    [40, 50, 60]
+])
+The array is:
+	Column 0	Column 1	Column 2
+Row 0	10	20	30
+Row 1	40	50	60
+Total of all values
+print(np.sum(data))
+Output:
+210
+Because:
+10+20+30+40+50+60=210 
+________________________________________
+Aggregation Using axis
+This is very important.
+axis=0 → Column-wise
+print(np.sum(data, axis=0))
+Output:
+[50 70 90]
+Because:
+Column 0: 10 + 40 = 50
+Column 1: 20 + 50 = 70
+Column 2: 30 + 60 = 90
+So remember:
+axis=0 → Go down → Column-wise
+________________________________________
+axis=1 → Row-wise
+print(np.sum(data, axis=1))
+Output:
+[60 150]
+Because:
+Row 0: 10 + 20 + 30 = 60
+Row 1: 40 + 50 + 60 = 150
+So:
+axis=1 → Go across → Row-wise
+________________________________________
+Easy Memory Trick for Axis
+axis = 0 → Column result
+axis = 1 → Row result
+Example:
+data = np.array([
+    [10, 20, 30],
+    [40, 50, 60]
+])
+
+print(np.mean(data, axis=0))
+Output:
+[25. 35. 45.]
+Because:
+(10+40)/2=25 (20+50)/2=35 (30+60)/2=45 
+________________________________________
+Common NumPy Aggregation Functions
+Function	Purpose
+np.sum()	Total
+np.mean()	Average
+np.min()	Minimum
+np.max()	Maximum
+np.prod()	Product
+np.std()	Standard deviation
+np.var()	Variance
+data.size	Number of elements
