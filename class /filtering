@@ -1,0 +1,173 @@
+import numpy as np
+
+marks = np.array([45, 78, 90, 55, 82, 60])
+
+result = marks[marks > 60]
+
+print(result)
+Output:
+[78 90 82]
+How does it work?
+First NumPy checks the condition:
+marks > 60
+It internally gives:
+[False  True  True  False  True  False]
+Now NumPy keeps only the positions where the result is True.
+So:
+45  → False
+78  → True
+90  → True
+55  → False
+82  → True
+60  → False
+Final output:
+[78 90 82]
+________________________________________
+Imagine a security person standing at a gate.
+Condition:
+“Only people above 18 years can enter.”
+If ages are:
+15, 22, 18, 25, 16, 30
+Only values satisfying the condition are selected:
+22, 25, 30
+That is filtering.
+________________________________________
+Different Filtering Conditions
+1. Greater than
+marks[marks > 70]
+If:
+marks = np.array([45, 78, 90, 55, 82, 60])
+Output:
+[78 90 82]
+________________________________________
+2. Less than
+marks[marks < 60]
+Output:
+[45 55]
+________________________________________
+3. Greater than or equal to
+marks[marks >= 60]
+Output:
+[78 90 82 60]
+________________________________________
+4. Equal to
+marks[marks == 60]
+Output:
+[60]
+________________________________________
+5. Not equal to
+marks[marks != 60]
+Output:
+[45 78 90 55 82]
+________________________________________
+Filtering with Multiple Conditions
+Suppose we need marks between 60 and 80.
+marks = np.array([45, 78, 90, 55, 82, 60, 70])
+
+result = marks[(marks >= 60) & (marks <= 80)]
+
+print(result)
+Output:
+[78 60 70]
+Here:
+& = AND
+Both conditions must be true.
+________________________________________
+OR Condition
+Suppose we want marks:
+•	Less than 50 
+•	OR greater than 80 
+result = marks[(marks < 50) | (marks > 80)]
+
+print(result)
+Output:
+[45 90 82]
+Here:
+| = OR
+At least one condition must be true.
+________________________________________
+Important Operators
+Operator	Meaning
+>	Greater than
+<	Less than
+>=	Greater than or equal
+<=	Less than or equal
+==	Equal
+!=	Not equal
+&	AND
+|	OR
+________________________________________
+Filtering Strings
+Filtering can also be done with names or categories.
+import numpy as np
+
+colors = np.array(["Red", "Blue", "Red", "Green", "Blue"])
+
+result = colors[colors == "Red"]
+
+print(result)
+Output:
+['Red' 'Red']
+________________________________________
+Filtering Even Numbers
+numbers = np.array([1, 2, 3, 4, 5, 6, 7, 8])
+
+result = numbers[numbers % 2 == 0]
+
+print(result)
+Output:
+[2 4 6 8]
+How?
+numbers % 2 == 0
+means:
+Select numbers whose remainder is 0 when divided by 2.
+________________________________________
+Filtering Odd Numbers
+result = numbers[numbers % 2 != 0]
+
+print(result)
+Output:
+[1 3 5 7]
+________________________________________
+Indexing vs Filtering
+Indexing
+We already know the position.
+marks[2]
+Output:
+90
+Meaning:
+Give me the value at index 2.
+Filtering
+We know the condition, not necessarily the position.
+marks[marks > 80]
+Output:
+[90 82]
+Meaning:
+Give me all values greater than 80.
+So remember:
+Indexing = select by position.
+Filtering = select by condition.
+________________________________________
+Activity
+import numpy as np
+
+prices = np.array([120, 450, 250, 700, 90, 550, 300])
+Ask them to find:
+1.	Products costing more than 300 
+2.	Products costing less than 200 
+3.	Products costing between 200 and 500 
+Answers:
+print(prices[prices > 300])
+Output:
+[450 700 550]
+print(prices[prices < 200])
+Output:
+[120 90]
+print(prices[(prices >= 200) & (prices <= 500)])
+Output:
+[450 250 300]
+Definition
+Filtering is the process of selecting elements from an array or dataset that satisfy a specified condition.
+Filtering means asking Python: “From all this data, show me only the values that satisfy my condition.”
+
+
