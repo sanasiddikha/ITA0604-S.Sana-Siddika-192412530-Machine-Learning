@@ -1,0 +1,32 @@
+Random decimal number
+import numpy as np
+
+print(np.random.random())
+Possible output:
+0.6472
+Run again:
+0.2351
+It produces values between:
+0 and 1
+________________________________________
+Generate Multiple Random Decimal Numbers
+print(np.random.random(5))
+Possible output:
+[0.12 0.76 0.34 0.91 0.45]
+________________________________________
+Random Integers
+Syntax:
+np.random.randint(start, stop)
+Example:
+print(np.random.randint(1, 10))
+Possible output:
+7
+Important:
+Start included
+Stop excluded
+Therefore:
+np.random.randint(1, 10)
+can generate:
+1 to 9
+________________________________________
+Dice Example
